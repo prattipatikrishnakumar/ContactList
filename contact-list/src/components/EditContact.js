@@ -1,13 +1,15 @@
 import React,{useState} from 'react';
 
 
+
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 import {useNavigate} from 'react-router-dom';
-
-
-
+import { useLocation } from 'react-router-dom'
+import uuid from 'react-uuid'
+import { Title } from '@material-ui/icons';
 const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -25,34 +27,29 @@ const useStyles = makeStyles(theme => ({
       },
     },
   }));
+  export default  function EditContact(props) {
 
-function AddContacts(props) {
-
-    // console.log(props)
+    const data = useLocation();
+    // console.log(data.state.contact)
     const classes = useStyles();
     
-    const [Name, setName] = useState('');
+    const [Name, setName] = useState(data.state.contact.Name);
     
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(data.state.contact.Email);
     const navigate = useNavigate();
 
     const handleSubmit = e => {
       e.preventDefault();
       //console.log(Name, email);
-      props.contactHandler([{Name:Name,Email:email}]);
+      props.updateContactHandler([{id:data.state.contact.id,Sno:data.state.contact.Sno,Name:Name,Email:email}]);
       setName(" ");
       setEmail(" ");
-    //  console.log(props.history);
-    // alert("Contact Added Successfully!!!");   
-    // navigate('/'); 
-    // window.location.reload(false);
-
-    };
-    
-    
-  
-    return (
-      <form className={classes.root} onSubmit={handleSubmit}>
+      navigate("/")
+    }
+  return(
+    <>
+    <h4>Edit Contact</h4>
+    <form className={classes.root} onSubmit={handleSubmit}>
         <TextField
           label="Name"
           variant="filled"
@@ -76,13 +73,13 @@ function AddContacts(props) {
           </Button> */}
           
           <Button type="submit" variant="contained" color="primary" >
-            Add Contact
+            Update Contact
           </Button>
-          <Button variant="contained" size="medium" color="primary" onClick={()=>navigate("/")}>Back To Home</Button>
+          {/* <Button variant="contained" size="medium" color="primary" onClick={()=>navigate("/")}>Back To Home</Button> */}
           
         </div>
       </form>
-    );
+      </>
+  );
 }
 
-export default AddContacts;

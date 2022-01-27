@@ -1,0 +1,28 @@
+{
+  "contacts": [
+    {
+      "id": "3573674-cd6-31a1-430-51d2f135abde",
+      "Sno": 1,
+      "Name": "Krishna",
+      "Email": "Kumar@123"
+    },
+    {
+      "id": "2a3523-5ca8-7088-37f-3c84f678ac4",
+      "Sno": 2,
+      "Name": " Vamsi",
+      "Email": "Vamsi@123"
+    },
+    {
+      "id": "0cd41e-d353-72f7-4ad3-515ae66bf3",
+      "Sno": 3,
+      "Name": " Prattipati",
+      "Email": "KK@123"
+    },
+    {
+      "id": "435c61-f550-85c2-3a84-3f6fe6f53764",
+      "Sno": 4,
+      "Name": " Hi",
+      "Email": "Hi@123"
+    }
+  ]
+}
