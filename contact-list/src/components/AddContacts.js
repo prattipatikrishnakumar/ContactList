@@ -37,6 +37,7 @@ function AddContacts(props) {
     const navigate = useNavigate();
 
     const handleSubmit = e => {
+      console.log(Name)
       e.preventDefault();
       //console.log(Name, email);
       props.contactHandler([{Name:Name,Email:email}]);

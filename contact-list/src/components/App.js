@@ -8,14 +8,35 @@ import AddContact from './AddContacts';
 import ContactDetails from './ContactDetails';
 import Api from '../api/contact'
 import EditContact from './EditContact';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Stack from '@mui/material/Stack';
+
+import IconButton from '@mui/material/IconButton';
 
 
 
 function App() {
 
   const [contacts,setContacts]=useState([]);
+  const [searchTerm,setsearchTerm]=useState("");
+  const [searchContactsresults,setsearchContactsresults]=useState([]);
   // const [getContactToBePosted,SetgetContactToBePosted]=useState({});
 
+  const searchItemHandler=(e)=>
+  {
+    // console.log(e);
+    setsearchTerm(e);
+    if(e!=="")
+    {
+      const newContacts= contacts.filter((contact)=>{
+
+        return Object.values(contact).join(" ").toLowerCase().includes(e.toLowerCase());
+      })
+      setsearchContactsresults(newContacts);
+    }
+
+  }
  const contactHandler=(contact)=>
   {
     //console.log(contact);
@@ -105,16 +126,20 @@ function App() {
     <>
     <div className="App" style={{textAlign:"center"}}>
       <Router>
+        
         <Header/>
        
         <Routes>
             
-          <Route path="/" element={<ContactList onDeleteClickHandler = {onDeleteClickHandler} contacts={contacts}></ContactList>}/>
+          <Route path="/" element={<ContactList onDeleteClickHandler = {onDeleteClickHandler} searchHandler={searchItemHandler} contacts={searchTerm.length<1?contacts:searchContactsresults}></ContactList>}/>
           <Route path="/addContact" element={<AddContact  contactHandler={contactHandler}></AddContact>}/>
           <Route path="/contactDetails/:Sno" element={<ContactDetails></ContactDetails>}/>
           <Route path="/editContact" element={<EditContact updateContactHandler={updateContactHandler}></EditContact>}/>
           
         </Routes>
+        {/* <Button startIcon={ <DeleteIcon />}>
+       Delete Contact
+        </Button> */}
 
        
       </Router>

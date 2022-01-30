@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 
@@ -63,11 +64,11 @@ export default function ContactCard(props) {
       <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
       {/* <Link to={{pathname:`/contactDetails/${props.contact.id}`, state:{contact:props.contact}}}> */}
 
-      <Item>{props.contact.id}</Item>
+      <Item><Link style={{textDecoration: 'none' ,focus:{textDecoration: 'none'},active:{textDecoration: 'none',color:'primary'}}} to={`/contactDetails/${props.contact.id}` } state={{ state: props.contact }} >{props.sno}</Link></Item>
       
       <Item>  
         
-          <Link to={`/contactDetails/${props.contact.id}` } state={{ state: props.contact }} >{props.contact.Name}</Link>
+          <Link style={{textDecoration: 'none' ,hover:{textDecoration: 'none'},focus:{textDecoration: 'none'},active:{textDecoration: 'none'}}} to={`/contactDetails/${props.contact.id}` } state={{ state: props.contact }} >{props.contact.Name}</Link>
     
     {/* <Link to={{
     pathname: `/contactDetails/${props.contact.id}`,
@@ -75,18 +76,30 @@ export default function ContactCard(props) {
   }}>{props.contact[0].Name}</Link> */}
     
     </Item>
-      <Item>{props.contact.Email}</Item>
+      <Item><Link style={{textDecoration: 'none' ,hover:{textDecoration: 'none'},focus:{textDecoration: 'none'},active:{textDecoration: 'none'}}} to={`/contactDetails/${props.contact.id}` } state={{ state: props.contact }} >{props.contact.Email}</Link></Item>
 
-      <Item><Link to={`/editContact`} state={{contact:props.contact}} ><Button  variant="outlined" color="primary"  size='small'>
+      <Item>
+        <ButtonGroup>
+
+        <Button  variant="outlined" color="primary"  size='small'><Link style={{textDecoration: 'none' ,hover:{textDecoration: 'none'},focus:{textDecoration: 'none'},active:{textDecoration: 'none'}}} to={`/editContact`} state={{contact:props.contact}} >
           Edit Contact
-      </Button></Link></Item>
-
-
-      <Item><Button onClick={()=>props.onDeleteClickHandler(props.contact.id)} variant="outlined" color="error"  size='small'>
+          </Link>
+      `</Button>
+      <Button onClick={()=>props.onDeleteClickHandler(props.contact.id)} variant="outlined" color="error"  size='small'>
           Delete Contact
-      </Button></Item>
+      </Button>
+      </ButtonGroup>
+      
+</Item>
 
 
+      {/* <Item><Button onClick={()=>props.onDeleteClickHandler(props.contact.id)} variant="outlined" color="error"  size='small'>
+          Delete Contact
+      </Button>
+      </Item> */}
+     
+
+     
 
         {/* <Item><Button  variant="outlined" startIcon={ <DeleteIcon />} onClick={()=>props.onDeleteClickHandler(props.contact.id)}>
        Delete Contact
